@@ -2,6 +2,8 @@
 
 class Admin_Controller extends CI_Controller 
 {
+	var $page_content = array();
+	
 	function __construct()
 	{
 		parent::__construct();
@@ -11,5 +13,8 @@ class Admin_Controller extends CI_Controller
 		
 		//load the base language file
 		$this->lang->load('admin_common');
+		
+		$this->page_content['header'] = $this->load->view('admin/header', array(), TRUE);
+		$this->page_content['footer'] = $this->load->view('admin/footer', array(), TRUE);
 	}
 }

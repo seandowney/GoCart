@@ -39,7 +39,9 @@
 */
 
 $route['default_controller']	= "cart";
-$route['404_override']			= "cart";
 
 //this for the admininstration console
 $route['admin']					= 'admin/dashboard';
+$route['admin/modules/(:any)/(:any)/(:any)']	= '$1/admin/$2/$3';
+$route['admin/modules/(:any)/(:any)']	= '$1/admin/$2';
+$route['admin/modules/(:any)']			= '$1/admin';
