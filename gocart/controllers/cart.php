@@ -1,19 +1,6 @@
 <?php
 
-class Cart extends CI_Controller {
-	
-	//we collect the categories automatically with each load rather than for each function
-	//this just cuts the codebase down a bit
-	var $categories	= '';
-	
-	//load all the pages into this variable so we can call it from all the methods
-	var $pages = '';
-	
-	// determine whether to display gift card link on all cart pages
-	//  This is Not the place to enable gift cards. It is a setting that is loaded during instantiation.
-	var $gift_cards_enabled; 
-	
-	var $header_text;
+class Cart extends Front_Controller {
 
 	function __construct()
 	{
@@ -21,29 +8,6 @@ class Cart extends CI_Controller {
 		
 		//make sure we're not always behind ssl
 		remove_ssl();
-		
-		$this->load->library('Go_cart');
-		$this->load->model(array('Page_model', 'Product_model', 'Digital_Product_model', 'Gift_card_model', 'Option_model', 'Order_model', 'Settings_model'));
-		$this->load->helper(array('form_helper', 'formatting_helper'));
-		
-		//fill in our variables
-		$this->categories	= $this->Category_model->get_categories_tierd(0);
-		$this->pages		= $this->Page_model->get_pages();
-		
-		// check if giftcards are enabled
-		$gc_setting = $this->Settings_model->get_settings('gift_cards');
-		if(!empty($gc_setting['enabled']) && $gc_setting['enabled']==1)
-		{
-			$this->gift_cards_enabled = true;
-		}			
-		else
-		{
-			$this->gift_cards_enabled = false;
-		}
-		
-		//load the theme package
-		$this->load->add_package_path(APPPATH.'themes/'.$this->config->item('theme').'/');
-		
 	}
 
 	function index()
@@ -90,7 +54,7 @@ class Cart extends CI_Controller {
 		if(!$code)
 		{
 			//if the term is in post, save it to the db and give me a reference
-			$term		= $this->input->post('term');
+			$term		= $this->input->post('term', true);
 			$code		= $this->Search_model->record_term($term);
 			
 			// no code? redirect so we can have the code in place for the sorting.
@@ -357,7 +321,6 @@ class Cart extends CI_Controller {
 			{
 				//we don't have this much in stock
 				$this->session->set_flashdata('error', sprintf(lang('not_enough_stock'), $stock->name, $stock->quantity));
-				$this->session->set_flashdata('cartkey', $cartkey);
 				$this->session->set_flashdata('quantity', $quantity);
 				$this->session->set_flashdata('option_values', $post_options);
 
@@ -373,8 +336,6 @@ class Cart extends CI_Controller {
 		// don't add the product if we are missing required option values
 		if( ! $status['validated'])
 		{
-			//if the cartkey does not exist, this will simply be blank
-			$this->session->set_flashdata('cartkey', $cartkey);
 			$this->session->set_flashdata('quantity', $quantity);
 			$this->session->set_flashdata('error', $status['message']);
 			$this->session->set_flashdata('option_values', $post_options);
@@ -536,8 +497,6 @@ class Cart extends CI_Controller {
 	{
 		if(!$this->gift_cards_enabled) redirect('/');
 		
-		$this->load->helper('utility_helper');
-		
 		// Load giftcard settings
 		$gc_settings = $this->Settings_model->get_settings("gift_cards");
 				
@@ -576,7 +535,7 @@ class Cart extends CI_Controller {
 			$card['sku']			= lang('giftcard');
 			$card['base_price']		= $card['price']; // price gets modified by options, show the baseline still...
 			$card['name']			= lang('giftcard');
-			$card['code']			= generate_code(); // from the utility helper
+			$card['code']			= generate_code(); // from the string helper
 			$card['excerpt']		= sprintf(lang('giftcard_excerpt'), set_value('gc_to_name'));
 			$card['weight']			= 0;
 			$card['quantity']		= 1;

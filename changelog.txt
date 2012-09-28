@@ -1,11 +1,19 @@
+Version 2.0.1
+	Release date: TBA
+	
+	Bug Fixes
+	
+		- Eliminated code remnant from product page
+		- Fixed an error in the product view related to options with no option.
+	
+	
 Version 2.0
 -------------
-	Release date: TBA
+	Release date: September 13, 2012
 	
 	Features
 		
 		- Upgraded to CodeIgniter 2.1.2
-		- Updated SQL install script to support ipv6 ip address length
 		- New default theme based on Twitter bootstrap 2.0
 		- Admin interface now based on twitter bootstrap
 		- Pagination on admin product list
@@ -16,6 +24,12 @@ Version 2.0
 		- Sortable products on front end (in the bootstrap theme)
 		- Breadcrumbs
 		- Routing system improved for optimum scalability
+		- New custom built wysiwyg editor (replaced TinyMCE) with CI based file manager
+		- Did a lot of file cleanup
+		- Supporting alternate thousands separator and decimal separators (via gocart config file)
+		- Supporting currency symbol on right or left (via gocart config file)
+		- XSS filtering on front end search
+		- Using CodeIgniter migrations library for DB updates
 		
 	
 	Bug Fixes
@@ -29,7 +43,14 @@ Version 2.0
 		- Fixed banner_model.php to properly restrict disabled banners for the get_homepage_banners() function.
 		- Fixed meta tag code in the default theme header.
 		- Fixed login redirect for expired customer sessions (thanks Dinesh)
+		- Updated SQL install script to support ipv6 ip address length
+		- Eliminated a field from the install script for "heard_about" in the orders table
 
+	Other
+
+		- Eliminated many unused files and functions
+		- Utilizing address_format more places (and added a <br> flag)
+		
 
 Version 1.2.3
 -------------

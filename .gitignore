@@ -1,4 +1,3 @@
-._*
 .htaccess
 uploads/*
 database.php
@@ -6,3 +5,14 @@ config.php
 !gocart/third_party/MX/Config.php
 gocart.php
 *.bak
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
