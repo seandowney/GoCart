@@ -119,6 +119,13 @@ $(document).ready(function(){
 					</li>
 					
 					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Modules <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="<?php echo $admin_url;?>modules/images">Images</a></li>
+						</ul>
+					</li>
+					
+					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo lang('common_administrative') ?> <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="<?php echo $admin_url;?>settings"><?php echo lang('common_settings') ?></a></li>

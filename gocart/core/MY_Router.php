@@ -1,11 +1,9 @@
-<?php
+<?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
-class My_Router extends CI_Router 
-{
-	function __construct()
-	{
-		parent::__construct();
-	}
+/* load the MX_Router class */
+require APPPATH."third_party/MX/Router.php";
+
+class MY_Router extends MX_Router {
 	
 	// this is here to add an additional layer to the routing system.
 	//If a route isn't found in the routes config file. then it will scan the database for a matching route.
@@ -40,10 +38,10 @@ class My_Router extends CI_Router
 				return $this->_set_request(explode('/', $val));
 			}
 		}
-		
+
 		// now try the GoCart specific routing
 		$segments = array_splice($segments, -2, 2);
-
+		
 		// Turn the segment array into a URI string
 		$uri = implode('/', $segments);
 

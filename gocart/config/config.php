@@ -15,6 +15,10 @@
 */
 $config['base_url']			= '';
 
+/* define the module locations and offset */
+$config['modules_locations'] = array(
+	APPPATH .'modules/' => '../modules/',
+);
 
 
 /*
