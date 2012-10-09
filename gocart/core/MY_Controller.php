@@ -101,8 +101,6 @@ class Admin_Controller extends Base_Controller
 		//load the base language file
 		$this->lang->load('admin_common');
 		
-		$this->page_content['header'] = $this->load->view('admin/header', array(), TRUE);
-		$this->page_content['footer'] = $this->load->view('admin/footer', array(), TRUE);
 		$this->lang->load('goedit');
 
 		// create partials for the header and footer
