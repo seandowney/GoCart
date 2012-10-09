@@ -20,7 +20,8 @@ class Admin extends Admin_Controller
 		$data['banners']		= $this->images_model->get_banners();
 		$data['page_title']		= 'Images';
 		
-		$this->load->view('admin/images_list', $data);
+		$this->template->title($data['page_title'], config_item('company_name'));
+		$this->template->build('admin/images_list', $data);
 	}
 	
 	function organize()
@@ -84,7 +85,9 @@ class Admin extends Admin_Controller
 		if ($this->form_validation->run() == false)
 		{
 			$data['error'] = validation_errors();
-			$this->load->view('admin/images_form', $data);
+
+			$this->template->title($data['page_title'], config_item('company_name'));
+			$this->template->build('admin/images_form', $data);
 		}
 		else
 		{	

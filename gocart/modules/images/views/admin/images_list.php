@@ -1,4 +1,3 @@
-<?php echo $this->page_content['header']; ?>
 <script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
@@ -116,5 +115,3 @@ function areyousure()
 	</tbody>
 	<?php endif;?>
 </table>
-
-<?php echo $this->page_content['footer']; ?>

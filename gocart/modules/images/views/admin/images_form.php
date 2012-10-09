@@ -1,5 +1,3 @@
-<?php echo $this->page_content['header']; ?>
-
 <?php
 
 $title			= array('name'=>'title', 'value' => set_value('title', $title));
@@ -48,4 +46,3 @@ $new_window		= array('name'=>'new_window', 'value'=>1, 'checked'=>set_checkbox('
 		$('.btn').attr('disabled', true).addClass('disabled');
 	});
 </script>
-<?php echo $this->page_content['footer']; ?>
