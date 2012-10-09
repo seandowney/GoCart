@@ -44,6 +44,8 @@ $route['default_controller']	= "cart";
 $route['admin']					= 'admin/dashboard';
 $route['admin/media/(:any)']		= 'admin/media/$1';
 
+$route['admin/modules/(:any)/(:any)/(:any)/(:any)/(:any)']	= '$1/admin/$2/$3/$4/$5';
+$route['admin/modules/(:any)/(:any)/(:any)/(:any)']	= '$1/admin/$2/$3/$4';
 $route['admin/modules/(:any)/(:any)/(:any)']	= '$1/admin/$2/$3';
 $route['admin/modules/(:any)/(:any)']	= '$1/admin/$2';
 $route['admin/modules/(:any)']			= '$1/admin';
