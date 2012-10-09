@@ -3,7 +3,7 @@
 /**
  * The base controller which is used by the Front and the Admin controllers
  */
-class Base_Controller extends CI_Controller
+class Base_Controller extends MX_Controller
 {
 	
 	public function __construct()
@@ -56,8 +56,8 @@ class Front_Controller extends Base_Controller
 		$this->load->helper(array('form_helper', 'formatting_helper'));
 		
 		//fill in our variables
-		$this->categories	= $this->Category_model->get_categories_tierd(0);
-		$this->pages		= $this->Page_model->get_pages();
+		$this->template->set('categories', $this->Category_model->get_categories_tierd(0));
+		$this->template->set('pages', $this->Page_model->get_pages());
 		
 		// check if giftcards are enabled
 		$gc_setting = $this->Settings_model->get_settings('gift_cards');

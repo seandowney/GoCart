@@ -43,6 +43,7 @@ $('.carousel').carousel({
 });
 </script>
 
+<?php echo modules::run('images/images/banners');?>
 
 <div class="row">
 	<?php foreach($boxes as $box):?>

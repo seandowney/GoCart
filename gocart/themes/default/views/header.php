@@ -15,12 +15,12 @@
 					<ul class="nav">
 						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalog <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<?php foreach($this->categories as $cat_menu):?>
+								<?php foreach($categories as $cat_menu):?>
 								<li><a href="<?php echo site_url($cat_menu['category']->slug);?>"><?php echo $cat_menu['category']->name;?></a></li>
 								<?php endforeach;?>
 							</ul>
 							
-							<?php foreach($this->pages as $menu_page):?>
+							<?php foreach($pages as $menu_page):?>
 
 								<li>
 								<?php if(empty($menu_page->content)):?>
