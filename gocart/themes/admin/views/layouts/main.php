@@ -12,7 +12,7 @@
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-ui.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js');?>"></script>
-
+<?php echo $template['metadata']; ?>
 <script type="text/javascript">
 /* GoEdit Media URLs*/
 var goedit_media_manager_url		= '<?php echo site_url(config_item('admin_folder').'/media');?>';
