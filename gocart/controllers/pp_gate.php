@@ -1,6 +1,6 @@
 <?php
 
-class pp_gate extends CI_Controller {
+class pp_gate extends MX_Controller {
 
 	function __construct()
 	{

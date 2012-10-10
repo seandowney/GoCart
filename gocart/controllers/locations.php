@@ -1,6 +1,6 @@
 <?php
 
-class Locations extends CI_Controller {	
+class Locations extends MX_Controller {	
 	
 	function __construct()
 	{		
