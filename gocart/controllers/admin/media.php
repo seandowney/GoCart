@@ -1,12 +1,13 @@
 <?php
 class Media extends Admin_Controller
 {
-	var $path;
+	var $mediapath;
+	
 	function __construct()
 	{
 		parent::__construct();
 		
-		$this->path	= 'uploads/wysiwyg';
+		$this->mediapath	= 'uploads/wysiwyg';
 		$this->auth->check_access('Admin', true);
 		$this->load->helper(array('file', 'form'));
 		
@@ -16,13 +17,14 @@ class Media extends Admin_Controller
 	{
 		$data['root']	= trim(implode('/',array_slice($this->uri->segment_array(), 3)), '/');
 
-		if(!is_dir($this->path.'/'.$data['root']))
+		if(!is_dir($this->mediapath.'/'.$data['root']))
 		{
 			redirect(config_item('admin_folder').'/media/index/');
 		}
 
 		$data['files'] = array();
-		$files	= get_dir_file_info($this->path.'/'.$data['root']);
+		$data['mediapath'] = $this->mediapath;
+		$files	= get_dir_file_info($this->mediapath.'/'.$data['root']);
 
 		if(!empty($files))
 		{
@@ -34,7 +36,7 @@ class Media extends Admin_Controller
 		
 		natcasesort($data['files']);
 		
-		$this->template->set_layout('ajax');
+		$this->template->set_layout('iframe');
 		$this->template->build('iframe/media', $data);
 	}
 	
@@ -47,24 +49,21 @@ class Media extends Admin_Controller
 		//get the file
 		$data['file']	= trim(implode('/',array_slice($this->uri->segment_array(), 3)), '/');
 
-		if(!file_exists($this->path.'/'.$data['file']))
+		if(!file_exists($this->mediapath.'/'.$data['file']))
 		{
 			$this->set_flashdata('error', 'The requested file could not be found');
 			redirect(config_item('admin_folder').'/media/index/');
 		}
 
-		$this->template->set_layout('ajax');
-		$this->template
-				->set_partial('part1', '/iframe/header', $data)
-				->set_partial('part2', '/iframe/embed', $data)
-				->build('/iframe/footer', $data);
+		$this->template->set_layout('iframe');
+		$this->template->build('iframe/footer', $data);
 	
 	}
 	
 	function edit_image()
 	{
-		$this->template->set_layout('ajax');
-		$this->template->build('/iframe/edit_image', $data);
+		$this->template->set_layout('iframe');
+		$this->template->build('iframe/edit_image', $data);
 	}
 	
 	function create_subfolder()
@@ -76,13 +75,13 @@ class Media extends Admin_Controller
 		{
 			$this->session->set_flashdata('error', 'You must submit a folder name.');
 		}
-		elseif(file_exists($this->path.'/'.$root.'/'.$folder))
+		elseif(file_exists($this->mediapath.'/'.$root.'/'.$folder))
 		{
 			$this->session->set_flashdata('error', 'There requested folder name is already in use.');
 		}
 		else
 		{
-			if(mkdir($this->path.'/'.$root.'/'.$folder))
+			if(mkdir($this->mediapath.'/'.$root.'/'.$folder))
 			{
 				$this->session->set_flashdata('message', 'Your subfolder has been successfully created.');
 			}
@@ -106,8 +105,8 @@ class Media extends Admin_Controller
 			$root .='/';
 		}
 		
-		$new	= $this->path.'/'.$subfolder.'/'.$filename;
-		$old	= $this->path.'/'.$root.$filename;
+		$new	= $this->mediapath.'/'.$subfolder.'/'.$filename;
+		$old	= $this->mediapath.'/'.$root.$filename;
 		
 		if(!file_exists($new) && file_exists($old))
 		{
@@ -132,8 +131,8 @@ class Media extends Admin_Controller
 			$new_filename	.= '.'.$parts['extension'];
 		}
 				
-		$new	= $this->path.'/'.$root.'/'.$new_filename;
-		$old	= $this->path.'/'.$root.'/'.$this->input->post('original');
+		$new	= $this->mediapath.'/'.$root.'/'.$new_filename;
+		$old	= $this->mediapath.'/'.$root.'/'.$this->input->post('original');
 		
 		if(!empty($new_filename) && !file_exists($new) && file_exists($old))
 		{
@@ -151,7 +150,7 @@ class Media extends Admin_Controller
 	function delete()
 	{
 		$root	= trim($this->input->post('root'), '/');
-		$file	= $this->path.'/'.$root.'/'.$this->input->post('filename');
+		$file	= $this->mediapath.'/'.$root.'/'.$this->input->post('filename');
 		
 		if(is_dir($file))
 		{

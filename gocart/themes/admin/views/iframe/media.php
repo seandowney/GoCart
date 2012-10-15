@@ -137,7 +137,7 @@ if(function_exists('validation_errors') && validation_errors() != '')
 			<div class="span3 draggable" style="overflow:hidden;" title="<?php echo $f;?>">
 
 			<?php
-			if(is_dir($this->path.'/'.$root.'/'.$f)):?>
+			if(is_dir($mediapath.'/'.$root.'/'.$f)):?>
 					<div class="img-thumbnail droppable" title="<?php echo $uri_root.$f;?>">
 						<img src="<?php echo base_url('assets/img/media-loader.gif');?>" style="margin:37px auto 0px auto; display:none;">
 					</div>
